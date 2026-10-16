@@ -1,0 +1,17 @@
+#ifndef _TEXT_ANALYZER_H_
+#define _TEXT_ANALYZER_H_
+
+#include <string>
+
+class TextAnalyzer
+{
+private:
+    std::string filepath{};
+
+public:
+    TextAnalyzer();
+    void loadFile(std::string &filepath);
+    void showStatistics() const;
+};
+
+#endif
