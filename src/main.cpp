@@ -96,6 +96,14 @@ int main()
         }
         case 6:
         {
+            try
+            {
+                text_analyzer.showLongestWords();
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
             break;
         }
         case 7:

@@ -303,3 +303,35 @@ int TextAnalyzer::countGivenWord(std::string &word) const
         throw FilepathNonExistantException("Filepath has not been set!");
     }
 }
+
+void TextAnalyzer::showLongestWords() const
+{
+    if (filepath.size() != 0)
+    {
+        std::ifstream input_stream(filepath);
+        if (input_stream.is_open())
+        {
+            std::vector<std::string> unique_words = get_vector_of_unique_words(input_stream);
+            std::map<std::string, size_t> word_lengths{};
+            for (const std::string &word : unique_words)
+            {
+                word_lengths[word] = word.size();
+            }
+            std::vector<std::pair<std::string, size_t>> sorted_word_lengths(word_lengths.begin(), word_lengths.end());
+            std::sort(sorted_word_lengths.begin(), sorted_word_lengths.end(), [](const auto &a, const auto &b)
+                      { return a.second > b.second; });
+            for (const auto &[word, length] : sorted_word_lengths)
+            {
+                std::cout << word << " with length of " << length << std::endl;
+            }
+        }
+        else
+        {
+            throw FileNotOpenedException("File could not be opened!");
+        }
+    }
+    else
+    {
+        throw FilepathNonExistantException("Filepath has not been set!");
+    }
+}

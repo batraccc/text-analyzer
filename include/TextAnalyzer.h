@@ -15,6 +15,8 @@ public:
     void showMostCommonWords() const;
     void showLetterFrequency() const;
     int countGivenWord(std::string &word) const;
+    void showLongestWords() const;
+    void saveAnalysis() const;
 };
 
 #endif
