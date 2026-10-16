@@ -262,3 +262,44 @@ void TextAnalyzer::showLetterFrequency() const
         throw FilepathNonExistantException("Filepath has not been set!");
     }
 }
+
+int TextAnalyzer::countGivenWord(std::string &word) const
+{
+    std::string standardized_word = standardize_word(word);
+    std::map<std::string, int> words{};
+    if (filepath.size() != 0)
+    {
+        std::ifstream input_stream(filepath);
+        if (input_stream.is_open())
+        {
+            std::string line{};
+            while (getline(input_stream, line))
+            {
+                std::stringstream ss(line);
+                std::string line_word{};
+                while (ss >> line_word)
+                {
+                    std::string standardized_line_word = standardize_word(line_word);
+                    words[standardized_line_word]++;
+                }
+            }
+            input_stream.close();
+            if (words.find(standardized_word) != words.end())
+            {
+                return words[standardized_word];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            throw FileNotOpenedException("File could not be opened!");
+        }
+    }
+    else
+    {
+        throw FilepathNonExistantException("Filepath has not been set!");
+    }
+}

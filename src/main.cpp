@@ -79,6 +79,19 @@ int main()
         }
         case 5:
         {
+            try
+            {
+                std::cin.ignore();
+                std::string word{};
+                std::cout << "Enter a word: ";
+                getline(std::cin, word);
+                int count = text_analyzer.countGivenWord(word);
+                std::cout << "Word " << word << " appears " << count << " times!";
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
             break;
         }
         case 6:
