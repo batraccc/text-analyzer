@@ -12,6 +12,8 @@ public:
     TextAnalyzer();
     void loadFile(std::string &filepath);
     void showStatistics() const;
+    void showMostCommonWords() const;
+    void showLetterFrequency() const;
 };
 
 #endif

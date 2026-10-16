@@ -1,7 +1,7 @@
 #include <iostream>
-#include "/Users/batraccc/C++/cpp-workout/Text Analyzer/include/TextAnalyzer.h"
-#include "/Users/batraccc/C++/cpp-workout/Text Analyzer/include/FileNotOpenedException.h"
-#include "/Users/batraccc/C++/cpp-workout/Text Analyzer/include/FilepathNonExistantException.h"
+#include "../include/TextAnalyzer.h"
+#include "../include/FileNotOpenedException.h"
+#include "../include/FilepathNonExistantException.h"
 
 void displayMenu()
 {
@@ -55,10 +55,26 @@ int main()
         }
         case 3:
         {
+            try
+            {
+                text_analyzer.showMostCommonWords();
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
             break;
         }
         case 4:
         {
+            try
+            {
+                text_analyzer.showLetterFrequency();
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
             break;
         }
         case 5:
