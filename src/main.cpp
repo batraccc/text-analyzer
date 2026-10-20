@@ -2,6 +2,8 @@
 #include "../include/TextAnalyzer.h"
 #include "../include/FileNotOpenedException.h"
 #include "../include/FilepathNonExistantException.h"
+#include "../include/TextStatistics.h"
+#include "../include/TextAnalysisOutput.h"
 
 void displayMenu()
 {
@@ -24,7 +26,8 @@ void displayMenu()
 
 int main()
 {
-    TextAnalyzer text_analyzer;
+    TextAnalysisOutput output;
+    TextStatistics statistics;
     int choice{};
     do
     {
@@ -38,14 +41,15 @@ int main()
             std::string filepath{};
             std::cout << "Enter filepath: ";
             std::getline(std::cin, filepath);
-            text_analyzer.loadFile(filepath);
+            TextAnalyzer analyzer(filepath);
+            statistics = analyzer.analyze();
             break;
         }
         case 2:
         {
             try
             {
-                text_analyzer.showStatistics();
+                output.showStatistics(statistics, std::cout);
             }
             catch (const std::runtime_error &e)
             {
@@ -57,7 +61,7 @@ int main()
         {
             try
             {
-                text_analyzer.showMostCommonWords();
+                output.showMostCommonWords(statistics, std::cout);
             }
             catch (const std::runtime_error &e)
             {
@@ -69,7 +73,7 @@ int main()
         {
             try
             {
-                text_analyzer.showLetterFrequency();
+                output.showLetterFrequency(statistics, std::cout);
             }
             catch (const std::runtime_error &e)
             {
@@ -81,12 +85,11 @@ int main()
         {
             try
             {
+                std::cout << "Enter word to search: ";
                 std::cin.ignore();
                 std::string word{};
-                std::cout << "Enter a word: ";
-                getline(std::cin, word);
-                int count = text_analyzer.countGivenWord(word);
-                std::cout << "Word " << word << " appears " << count << " times!";
+                std::getline(std::cin, word);
+                output.showCountOfWord(statistics, word, std::cout);
             }
             catch (const std::runtime_error &e)
             {
@@ -98,7 +101,7 @@ int main()
         {
             try
             {
-                text_analyzer.showLongestWords();
+                output.showLongestWords(statistics, std::cout);
             }
             catch (const std::runtime_error &e)
             {
@@ -108,6 +111,19 @@ int main()
         }
         case 7:
         {
+            try
+            {
+                std::cin.ignore();
+                std::string filepath{};
+                std::cout << "Enter filepath: ";
+                std::getline(std::cin, filepath);
+                output.saveAnalysis(statistics, filepath);
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+
             break;
         }
         default:

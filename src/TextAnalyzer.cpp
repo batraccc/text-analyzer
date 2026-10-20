@@ -1,22 +1,13 @@
 #include "../include/TextAnalyzer.h"
 #include "../include/FileNotOpenedException.h"
 #include "../include/FilepathNonExistantException.h"
+#include "../include/TextUtilities.h"
 #include <fstream>
 #include <map>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include <iostream>
-
-std::string &standardize_word(std::string &word)
-{
-    word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
-    for (char &character : word)
-    {
-        character = static_cast<char>(std::tolower(static_cast<unsigned char>(character)));
-    }
-    return word;
-}
 
 int count_characters(std::ifstream &input_stream)
 {
@@ -129,209 +120,78 @@ double calculate_average_word_length(std::vector<std::string> &words)
     return total_length / (static_cast<int>(words.size()));
 }
 
-TextAnalyzer::TextAnalyzer() {}
+TextAnalyzer::TextAnalyzer(const std::string &filepath) : filepath{filepath} {}
 
-void TextAnalyzer::loadFile(std::string &filepath)
+TextStatistics TextAnalyzer::analyze() const
 {
-    this->filepath = filepath;
-    std::cout << "File loaded successfully" << std::endl;
-    std::cout << std::endl;
-}
-
-void TextAnalyzer::showStatistics() const
-{
-    if (filepath.size() != 0)
+    TextStatistics statistics;
+    std::ifstream input_stream(filepath);
+    if (input_stream.is_open())
     {
-        std::ifstream input_stream(filepath);
-        if (input_stream.is_open())
+        std::string line{};
+        std::vector<std::string> unique_words{};
+        std::map<std::string, int> word_count{};
+        std::map<char, int> letter_frequency{};
+        std::map<std::string, size_t> word_lengths{};
+        while (getline(input_stream, line))
         {
-            int characters = count_characters(input_stream);
-            input_stream.clear();
-            input_stream.seekg(0, std::ios::beg);
-            int characters_without_spaces = count_characters_without_spaces(input_stream);
-            input_stream.clear();
-            input_stream.seekg(0, std::ios::beg);
-            int words = count_words(input_stream);
-            input_stream.clear();
-            input_stream.seekg(0, std::ios::beg);
-            int sentences = count_sentences(input_stream);
-            input_stream.clear();
-            input_stream.seekg(0, std::ios::beg);
-            int lines = count_lines(input_stream);
-            input_stream.clear();
-            input_stream.seekg(0, std::ios::beg);
-            std::vector<std::string> unique_words = get_vector_of_unique_words(input_stream);
-            double average_word_length = calculate_average_word_length(unique_words);
-            std::cout << "===== TEXT STATISTICS =====" << std::endl;
-            std::cout << "Characters: " << characters << std::endl;
-            std::cout << "Characters without spaces: " << characters_without_spaces << std::endl;
-            std::cout << "Words: " << words << std::endl;
-            std::cout << "Sentances: " << sentences << std::endl;
-            std::cout << "Lines:" << lines << std::endl;
-            std::cout << "Unique words: " << unique_words.size() << std::endl;
-            std::cout << "Average word length: " << average_word_length << std::endl;
-            std::cout << std::endl;
-            input_stream.close();
-        }
-        else
-        {
-            throw FileNotOpenedException("File could not be opened!");
-        }
-    }
-    else
-    {
-        throw FilepathNonExistantException("Filepath has not been set!");
-    }
-}
-
-void TextAnalyzer::showMostCommonWords() const
-{
-    std::map<std::string, int> words{};
-    if (filepath.size() != 0)
-    {
-        std::ifstream input_stream(filepath);
-        if (input_stream.is_open())
-        {
-            std::string line{};
-            while (getline(input_stream, line))
+            bool previous_was_terminator = false;
+            statistics.character_count += static_cast<int>(line.size());
+            for (const char &character : line)
             {
-                std::stringstream ss(line);
-                std::string word{};
-                while (ss >> word)
+                if (!isspace(character))
                 {
-                    std::string standardized_word = standardize_word(word);
-                    words[standardized_word]++;
+                    statistics.character_count_without_spaces++;
                 }
-            }
-            input_stream.close();
-            std::vector<std::pair<std::string, int>> sorted_words(words.begin(), words.end());
-            std::sort(sorted_words.begin(), sorted_words.end(), [](const auto &a, const auto &b)
-                      { return a.second > b.second; });
-            for (const auto &[word, count] : sorted_words)
-            {
-                std::cout << word << ": " << count << std::endl;
-            }
-        }
-        else
-        {
-            throw FileNotOpenedException("File could not be opened!");
-        }
-    }
-    else
-    {
-        throw FilepathNonExistantException("Filepath has not been set!");
-    }
-}
-
-void TextAnalyzer::showLetterFrequency() const
-{
-    std::map<char, int> letter_frequency{};
-    if (filepath.size() != 0)
-    {
-        std::ifstream input_stream(filepath);
-        if (input_stream.is_open())
-        {
-            std::string line{};
-            while (getline(input_stream, line))
-            {
-                for (char &character : line)
+                if (!isspace(character) && !ispunct(character))
                 {
-                    if (!isspace(character) && !ispunct(character))
+                    char altered_character = static_cast<char>(std::tolower(static_cast<unsigned char>(character)));
+                    letter_frequency[altered_character]++;
+                }
+                if (character == '.' || character == '!' || character == '?')
+                {
+                    if (!previous_was_terminator)
                     {
-                        character = static_cast<char>(std::tolower(static_cast<unsigned char>(character)));
-                        letter_frequency[character]++;
+                        statistics.sentence_count++;
                     }
+                    previous_was_terminator = true;
                 }
-            }
-            input_stream.close();
-            std::vector<std::pair<char, int>> letters_sorted(letter_frequency.begin(), letter_frequency.end());
-            std::sort(letters_sorted.begin(), letters_sorted.end(), [](const auto &a, const auto &b)
-                      { return a.second > b.second; });
-            for (const auto &[letter, count] : letters_sorted)
-            {
-                std::cout << letter << ": " << count << std::endl;
-            }
-        }
-        else
-        {
-            throw FileNotOpenedException("File could not be opened!");
-        }
-    }
-    else
-    {
-        throw FilepathNonExistantException("Filepath has not been set!");
-    }
-}
-
-int TextAnalyzer::countGivenWord(std::string &word) const
-{
-    std::string standardized_word = standardize_word(word);
-    std::map<std::string, int> words{};
-    if (filepath.size() != 0)
-    {
-        std::ifstream input_stream(filepath);
-        if (input_stream.is_open())
-        {
-            std::string line{};
-            while (getline(input_stream, line))
-            {
-                std::stringstream ss(line);
-                std::string line_word{};
-                while (ss >> line_word)
+                else
                 {
-                    std::string standardized_line_word = standardize_word(line_word);
-                    words[standardized_line_word]++;
+                    previous_was_terminator = false;
                 }
             }
-            input_stream.close();
-            if (words.find(standardized_word) != words.end())
+            std::stringstream ss(line);
+            std::string word{};
+            while (ss >> word)
             {
-                return words[standardized_word];
+                statistics.word_count++;
+                std::string standardized_word = standardize_word(word);
+                if (std::find(unique_words.begin(), unique_words.end(), standardized_word) == unique_words.end())
+                    unique_words.push_back(standardized_word);
+                word_count[standardized_word]++;
             }
-            else
+            statistics.line_count++;
+            statistics.unique_word_count = static_cast<int>(unique_words.size());
+            size_t length_of_all_words{0};
+            for (const std::string &word : unique_words)
             {
-                return 0;
+                length_of_all_words += word.size();
             }
-        }
-        else
-        {
-            throw FileNotOpenedException("File could not be opened!");
-        }
-    }
-    else
-    {
-        throw FilepathNonExistantException("Filepath has not been set!");
-    }
-}
-
-void TextAnalyzer::showLongestWords() const
-{
-    if (filepath.size() != 0)
-    {
-        std::ifstream input_stream(filepath);
-        if (input_stream.is_open())
-        {
-            std::vector<std::string> unique_words = get_vector_of_unique_words(input_stream);
-            std::map<std::string, size_t> word_lengths{};
+            statistics.average_word_length = static_cast<double>(length_of_all_words) / unique_words.size();
+            statistics.word_frequencies = word_count;
+            statistics.letter_frequencies = letter_frequency;
             for (const std::string &word : unique_words)
             {
                 word_lengths[word] = word.size();
             }
-            std::vector<std::pair<std::string, size_t>> sorted_word_lengths(word_lengths.begin(), word_lengths.end());
-            std::sort(sorted_word_lengths.begin(), sorted_word_lengths.end(), [](const auto &a, const auto &b)
-                      { return a.second > b.second; });
-            for (const auto &[word, length] : sorted_word_lengths)
-            {
-                std::cout << word << " with length of " << length << std::endl;
-            }
+            statistics.unique_words = unique_words;
         }
-        else
-        {
-            throw FileNotOpenedException("File could not be opened!");
-        }
+        input_stream.close();
+        return statistics;
     }
     else
     {
-        throw FilepathNonExistantException("Filepath has not been set!");
+        throw FileNotOpenedException("File could not be opened!");
     }
 }

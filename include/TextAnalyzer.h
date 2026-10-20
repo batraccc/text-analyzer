@@ -2,6 +2,7 @@
 #define _TEXT_ANALYZER_H_
 
 #include <string>
+#include "TextStatistics.h"
 
 class TextAnalyzer
 {
@@ -9,14 +10,8 @@ private:
     std::string filepath{};
 
 public:
-    TextAnalyzer();
-    void loadFile(std::string &filepath);
-    void showStatistics() const;
-    void showMostCommonWords() const;
-    void showLetterFrequency() const;
-    int countGivenWord(std::string &word) const;
-    void showLongestWords() const;
-    void saveAnalysis() const;
+    TextAnalyzer(const std::string &filepath);
+    TextStatistics analyze() const;
 };
 
 #endif

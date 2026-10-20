@@ -1,0 +1,338 @@
+===== TEXT STATISTICS =====
+Characters: 2658
+Characters without spaces: 2263
+Words: 400
+Sentances: 51
+Lines:9
+Unique words: 152
+Average word length: 5.98684
+
+
+ut: 15
+et: 9
+quis: 8
+sed: 8
+ac: 7
+id: 7
+vestibulum: 7
+eleifend: 7
+vitae: 6
+nunc: 6
+tincidunt: 5
+morbi: 5
+leo: 5
+lacus: 5
+placerat: 5
+non: 5
+lectus: 4
+laoreet: 4
+tempor: 4
+mi: 4
+sit: 4
+malesuada: 4
+amet: 4
+euismod: 4
+vel: 4
+aliquam: 4
+tristique: 4
+turpis: 4
+dolor: 4
+donec: 4
+maecenas: 4
+elit: 4
+efficitur: 4
+orci: 4
+eget: 4
+integer: 3
+in: 3
+duis: 3
+enim: 3
+pellentesque: 3
+praesent: 3
+nisl: 3
+quam: 3
+etiam: 3
+eu: 3
+scelerisque: 3
+ex: 3
+nisi: 3
+sem: 3
+faucibus: 3
+felis: 3
+congue: 3
+mauris: 3
+finibus: 3
+tortor: 3
+augue: 3
+a: 3
+viverra: 3
+at: 3
+urna: 3
+ante: 3
+velit: 3
+vivamus: 3
+ipsum: 3
+egestas: 3
+accumsan: 2
+erat: 2
+aenean: 2
+vehicula: 2
+arcu: 2
+bibendum: 2
+iaculis: 2
+blandit: 2
+condimentum: 2
+tellus: 2
+senectus: 2
+habitant: 2
+semper: 2
+consequat: 2
+sagittis: 2
+rutrum: 2
+gravida: 2
+magna: 2
+cursus: 2
+massa: 2
+mattis: 2
+feugiat: 2
+maximus: 2
+metus: 2
+fermentum: 2
+molestie: 2
+mollis: 2
+fames: 2
+nam: 2
+purus: 2
+netus: 2
+dictum: 2
+est: 2
+posuere: 2
+per: 2
+dui: 2
+odio: 2
+inceptos: 1
+volutpat: 1
+ornare: 1
+nulla: 1
+nostra: 1
+dictumst: 1
+platea: 1
+porta: 1
+porttitor: 1
+eros: 1
+facilisis: 1
+pretium: 1
+pulvinar: 1
+neque: 1
+diam: 1
+fusce: 1
+quisque: 1
+rhoncus: 1
+luctus: 1
+lorem: 1
+sapien: 1
+cras: 1
+conubia: 1
+lobortis: 1
+ligula: 1
+habitasse: 1
+consectetur: 1
+sociosqu: 1
+taciti: 1
+hac: 1
+hendrerit: 1
+tempus: 1
+commodo: 1
+torquent: 1
+class: 1
+himenaeos: 1
+lacinia: 1
+ultrices: 1
+ultricies: 1
+justo: 1
+aptent: 1
+imperdiet: 1
+aliquet: 1
+interdum: 1
+venenatis: 1
+adipiscing: 1
+ad: 1
+litora: 1
+libero: 1
+elementum: 1
+
+e: 278
+i: 219
+t: 200
+u: 196
+a: 179
+s: 177
+n: 128
+m: 111
+l: 110
+r: 110
+c: 96
+o: 90
+d: 68
+p: 42
+v: 39
+q: 33
+f: 32
+b: 30
+g: 26
+h: 9
+x: 5
+j: 1
+
+pellentesque with length of 12
+condimentum with length of 11
+scelerisque with length of 11
+consectetur with length of 11
+vestibulum with length of 10
+adipiscing with length of 10
+consequat with length of 9
+himenaeos with length of 9
+hendrerit with length of 9
+venenatis with length of 9
+habitasse with length of 9
+fermentum with length of 9
+facilisis with length of 9
+ultricies with length of 9
+malesuada with length of 9
+tristique with length of 9
+tincidunt with length of 9
+elementum with length of 9
+porttitor with length of 9
+efficitur with length of 9
+imperdiet with length of 9
+inceptos with length of 8
+maecenas with length of 8
+senectus with length of 8
+sagittis with length of 8
+accumsan with length of 8
+habitant with length of 8
+dictumst with length of 8
+pulvinar with length of 8
+interdum with length of 8
+praesent with length of 8
+faucibus with length of 8
+sociosqu with length of 8
+vehicula with length of 8
+volutpat with length of 8
+eleifend with length of 8
+bibendum with length of 8
+placerat with length of 8
+torquent with length of 8
+molestie with length of 8
+lobortis with length of 8
+ultrices with length of 8
+conubia with length of 7
+maximus with length of 7
+blandit with length of 7
+euismod with length of 7
+vivamus with length of 7
+egestas with length of 7
+laoreet with length of 7
+commodo with length of 7
+lacinia with length of 7
+aliquet with length of 7
+feugiat with length of 7
+finibus with length of 7
+pretium with length of 7
+gravida with length of 7
+quisque with length of 7
+aliquam with length of 7
+integer with length of 7
+rhoncus with length of 7
+viverra with length of 7
+iaculis with length of 7
+posuere with length of 7
+libero with length of 6
+tempor with length of 6
+litora with length of 6
+aptent with length of 6
+platea with length of 6
+dictum with length of 6
+rutrum with length of 6
+ornare with length of 6
+cursus with length of 6
+sapien with length of 6
+lectus with length of 6
+turpis with length of 6
+semper with length of 6
+aenean with length of 6
+ligula with length of 6
+nostra with length of 6
+congue with length of 6
+luctus with length of 6
+taciti with length of 6
+tellus with length of 6
+tortor with length of 6
+mollis with length of 6
+mattis with length of 6
+mauris with length of 6
+tempus with length of 6
+donec with length of 5
+metus with length of 5
+augue with length of 5
+massa with length of 5
+morbi with length of 5
+magna with length of 5
+neque with length of 5
+netus with length of 5
+velit with length of 5
+class with length of 5
+lorem with length of 5
+etiam with length of 5
+nulla with length of 5
+vitae with length of 5
+fames with length of 5
+lacus with length of 5
+felis with length of 5
+justo with length of 5
+ipsum with length of 5
+purus with length of 5
+fusce with length of 5
+porta with length of 5
+dolor with length of 5
+urna with length of 4
+nisl with length of 4
+duis with length of 4
+eget with length of 4
+elit with length of 4
+quam with length of 4
+quis with length of 4
+arcu with length of 4
+diam with length of 4
+enim with length of 4
+orci with length of 4
+odio with length of 4
+cras with length of 4
+amet with length of 4
+eros with length of 4
+nunc with length of 4
+erat with length of 4
+nisi with length of 4
+ante with length of 4
+sit with length of 3
+nam with length of 3
+non with length of 3
+vel with length of 3
+sem with length of 3
+sed with length of 3
+est with length of 3
+per with length of 3
+leo with length of 3
+hac with length of 3
+dui with length of 3
+in with length of 2
+ut with length of 2
+at with length of 2
+mi with length of 2
+et with length of 2
+eu with length of 2
+ad with length of 2
+ex with length of 2
+id with length of 2
+ac with length of 2
+a with length of 1
