@@ -50,3 +50,8 @@ const std::vector<std::string> &TextStatistics::getUniqueWords() const
 {
     return unique_words;
 }
+
+bool TextStatistics::getIsEmpty() const
+{
+    return is_empty;
+}

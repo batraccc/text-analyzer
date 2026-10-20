@@ -19,6 +19,7 @@ private:
     std::map<std::string, int> word_frequencies{};
     std::map<char, int> letter_frequencies{};
     std::vector<std::string> unique_words{};
+    bool is_empty{true};
 
 public:
     TextStatistics();
@@ -32,6 +33,7 @@ public:
     const std::map<std::string, int> &getWordFrequencies() const;
     const std::map<char, int> &getLetterFrequncies() const;
     const std::vector<std::string> &getUniqueWords() const;
+    bool getIsEmpty() const;
 };
 
 #endif

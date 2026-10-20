@@ -1,7 +1,6 @@
 #include <iostream>
 #include "../include/TextAnalyzer.h"
 #include "../include/FileNotOpenedException.h"
-#include "../include/FilepathNonExistantException.h"
 #include "../include/TextStatistics.h"
 #include "../include/TextAnalysisOutput.h"
 
@@ -37,12 +36,19 @@ int main()
         {
         case 1:
         {
-            std::cin.ignore();
-            std::string filepath{};
-            std::cout << "Enter filepath: ";
-            std::getline(std::cin, filepath);
-            TextAnalyzer analyzer(filepath);
-            statistics = analyzer.analyze();
+            try
+            {
+                std::cin.ignore();
+                std::string filepath{};
+                std::cout << "Enter filepath: ";
+                std::getline(std::cin, filepath);
+                TextAnalyzer analyzer(filepath);
+                statistics = analyzer.analyze();
+            }
+            catch (const std::runtime_error &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
             break;
         }
         case 2:
@@ -61,7 +67,11 @@ int main()
         {
             try
             {
-                output.showMostCommonWords(statistics, std::cout);
+                std::cin.ignore();
+                int number_of_words_to_display{};
+                std::cout << "Enter number of words to display: ";
+                std::cin >> number_of_words_to_display;
+                output.showMostCommonWords(statistics, std::cout, number_of_words_to_display);
             }
             catch (const std::runtime_error &e)
             {
@@ -101,7 +111,11 @@ int main()
         {
             try
             {
-                output.showLongestWords(statistics, std::cout);
+                std::cin.ignore();
+                int number_of_words_to_display{};
+                std::cout << "Enter number of words to display: ";
+                std::cin >> number_of_words_to_display;
+                output.showLongestWords(statistics, std::cout, number_of_words_to_display);
             }
             catch (const std::runtime_error &e)
             {

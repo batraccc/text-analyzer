@@ -3,6 +3,7 @@
 
 #include <string>
 #include <algorithm>
+#include <cctype>
 
 inline std::string &standardize_word(std::string &word)
 {
